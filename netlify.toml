@@ -1,12 +1,13 @@
 [build]
-  # Explicitly install with devDependencies (typescript, vite, etc.) at the
-  # repo root, then build the desktop web app. The explicit install avoids
-  # Netlify's auto-install omitting devDependencies in this workspace setup.
-  command = "npm install --include=dev --workspaces --include-workspace-root && npm run build"
+  # Deterministic install from the committed root lockfile. `npm ci` installs
+  # every workspace (incl. devDependencies like typescript/vite); --include=dev
+  # guards against NODE_ENV=production omitting them.
+  command = "npm ci --include=dev && npm run build"
   publish = "apps/desktop/dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Match the local toolchain (npm 10.x) where the build is known-good.
+  NODE_VERSION = "22"
 
 # SPA fallback: serve index.html for any client-side route.
 [[redirects]]
