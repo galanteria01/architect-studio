@@ -1,0 +1,13 @@
+[build]
+  # Monorepo root build (npm workspaces). Builds apps/desktop via the root script.
+  command = "npm run build"
+  publish = "apps/desktop/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback: serve index.html for any client-side route.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
