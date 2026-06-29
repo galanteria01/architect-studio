@@ -5,6 +5,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Ensure devDependencies (typescript, vite, etc.) are installed on Netlify.
+  NPM_FLAGS = "--include=dev"
+  NPM_CONFIG_PRODUCTION = "false"
 
 # SPA fallback: serve index.html for any client-side route.
 [[redirects]]
