@@ -1,13 +1,12 @@
 [build]
-  # Monorepo root build (npm workspaces). Builds apps/desktop via the root script.
-  command = "npm run build"
+  # Explicitly install with devDependencies (typescript, vite, etc.) at the
+  # repo root, then build the desktop web app. The explicit install avoids
+  # Netlify's auto-install omitting devDependencies in this workspace setup.
+  command = "npm install --include=dev --workspaces --include-workspace-root && npm run build"
   publish = "apps/desktop/dist"
 
 [build.environment]
   NODE_VERSION = "20"
-  # Ensure devDependencies (typescript, vite, etc.) are installed on Netlify.
-  NPM_FLAGS = "--include=dev"
-  NPM_CONFIG_PRODUCTION = "false"
 
 # SPA fallback: serve index.html for any client-side route.
 [[redirects]]
