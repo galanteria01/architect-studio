@@ -3,6 +3,10 @@ node_modules/
 .pnp
 .pnp.js
 
+# Lockfile is pinned to an internal Artifactory registry that CI (Netlify)
+# cannot reach; let CI resolve fresh against the public npm registry.
+package-lock.json
+
 # Build outputs
 dist/
 dist-ssr/
